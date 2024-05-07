@@ -37,7 +37,7 @@
             this.buttonConn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkMDP = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,16 +128,16 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Matricule :";
             // 
-            // checkBox1
+            // checkMDP
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(630, 275);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(139, 17);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Afficher le mot de passe";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkMDP.AutoSize = true;
+            this.checkMDP.Location = new System.Drawing.Point(630, 275);
+            this.checkMDP.Name = "checkMDP";
+            this.checkMDP.Size = new System.Drawing.Size(139, 17);
+            this.checkMDP.TabIndex = 9;
+            this.checkMDP.Text = "Afficher le mot de passe";
+            this.checkMDP.UseVisualStyleBackColor = true;
+            this.checkMDP.CheckedChanged += new System.EventHandler(this.checkMDP_CheckedChanged);
             // 
             // PageCo
             // 
@@ -145,7 +145,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(238)))), ((int)(((byte)(226)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.checkMDP);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonConn);
@@ -172,7 +172,7 @@
         private System.Windows.Forms.Button buttonConn;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkMDP;
     }
 }
 
