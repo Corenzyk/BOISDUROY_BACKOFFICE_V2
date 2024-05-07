@@ -80,51 +80,30 @@ namespace BOISDUROY_BACKOFFICE.Controllers
             return dtListeProd;
         }
 
-        public DataTable GetListeProd(bool combo, string IdProd)
+        public DataTable GetProdByFiltre(string LibProd, bool Dispo)
         {
             dtListeProd = new DataTable();
             conn = new Connexion();
-            string rqtSql = "SELECT CODE_PROD, LIB_PROD, EST_DISPO FROM PRODUITS";
-            if (IdProd != "")
-            {
-                rqtSql += " WHERE CODE_PROD = " + IdProd;
-            }
-            rqtSql += ";";
+            string rqtSql = "SELECT CODE_PROD, LIB_PROD, EST_DISPO FROM PRODUITS ";
 
-            try
+            if (LibProd != "" || Dispo)
             {
-                using (MySqlCommand cmd = new MySqlCommand(rqtSql, conn.Connection))
+                rqtSql += "WHERE ";
+
+                if (LibProd != "")
                 {
-                    conn.Connection.Open();
-                    MySqlDataReader reader = cmd.ExecuteReader();
-                    dtListeProd.Load(reader);
-                    if (combo)
-                    {
-                        DataRow workRow = dtListeProd.NewRow();
-                        workRow[0] = -1;
-                        workRow[1] = "";
-                        dtListeProd.Rows.InsertAt(workRow, 0);
-                    }
-
-
+                    rqtSql += "LIB_PROD LIKE '%" + LibProd + "%' ";
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            conn.Connection.Close();
-            return dtListeProd;
-        }
 
-        public String GetProdById(string codeP)
-        {
-            String leproduit = "";
-            if (codeP != "")
-            {
-                string rqtSql = "SELECT CODE_PROD, LIB_PROD WHERE CODE_PROD = '" + codeP + "';";
-                dtListeProd = new DataTable();
-                conn = new Connexion();
+                if (LibProd != "" && Dispo)
+                    rqtSql += "AND ";
+
+                if (Dispo)
+                {
+                    rqtSql += "EST_DISPO = true ";
+                }
+
+                rqtSql += ";";
 
                 try
                 {
@@ -133,26 +112,35 @@ namespace BOISDUROY_BACKOFFICE.Controllers
                         conn.Connection.Open();
                         MySqlDataReader reader = cmd.ExecuteReader();
                         dtListeProd.Load(reader);
-
-                    }
-                    conn.Connection.Close();
-                    if (dtListeProd.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in dtListeProd.Rows)
-                        {
-                            leproduit = row["LIB_PROD"].ToString();
-                        }
                     }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.ToString());
                 }
-
+                conn.Connection.Close();
+                return dtListeProd;
             }
-            return leproduit;
+            else
+            {
+                rqtSql += ";";
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(rqtSql, conn.Connection))
+                    {
+                        conn.Connection.Open();
+                        MySqlDataReader reader = cmd.ExecuteReader();
+                        dtListeProd.Load(reader);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+                conn.Connection.Close();
+                return dtListeProd;
+            }
         }
-
 
         public void InsertProd(string code, string nom, bool dispo)
         {
@@ -195,7 +183,7 @@ namespace BOISDUROY_BACKOFFICE.Controllers
             conn.Connection.Close();
         }
 
-        public bool DeleteProd(int idProd)
+        public bool DeleteProd(string idProd)
         {
             bool result = false;
             conn = new Connexion();

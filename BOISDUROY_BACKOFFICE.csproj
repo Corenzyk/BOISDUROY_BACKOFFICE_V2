@@ -105,6 +105,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Logging.cs" />
     <Compile Include="Controllers\Fonctions.cs" />
     <Compile Include="Controllers\Employes.cs" />
     <Compile Include="Controllers\Produits.cs" />
@@ -114,6 +115,12 @@
     </Compile>
     <Compile Include="EmployesAM.Designer.cs">
       <DependentUpon>EmployesAM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProduitsAM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProduitsAM.Designer.cs">
+      <DependentUpon>ProduitsAM.cs</DependentUpon>
     </Compile>
     <Compile Include="ListeEmployes.cs">
       <SubType>Form</SubType>
@@ -151,6 +158,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="EmployesAM.resx">
       <DependentUpon>EmployesAM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListeNotes.resx">
+      <DependentUpon>ListeNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProduitsAM.resx">
+      <DependentUpon>ProduitsAM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListeEmployes.resx">
       <DependentUpon>ListeEmployes.cs</DependentUpon>

@@ -77,16 +77,38 @@ namespace BOISDUROY_BACKOFFICE.Controllers
             return dtListeEmp;
         }
 
-        public DataTable GetEmpByNom(string NomPrenomEmp)
+        public DataTable GetEmpByFiltre(string NomPrenomEmp, string Fonc, string Prod)
         {
             dtListeEmp = new DataTable();
             conn = new Connexion();
             string rqtSql = "SELECT ID_EMP,NOM_EMP,PRENOM_EMP,F.LIB_FONC,P.LIB_PROD,DATE_NAISS,DATE_ENTREE,DATE_SORTIE,ID_EMP_ETRE_SUPERVISE,EST_AUTO,EST_RESP " +
-                "FROM EMPLOYES E LEFT JOIN PRODUITS P ON E.CODE_PROD = P.CODE_PROD LEFT JOIN FONCTIONS F ON E.CODE_FONCT=F.CODE_FONCT";
+                    "FROM EMPLOYES E LEFT JOIN PRODUITS P ON E.CODE_PROD = P.CODE_PROD LEFT JOIN FONCTIONS F ON E.CODE_FONCT=F.CODE_FONCT ";
 
-            if (NomPrenomEmp != "")
+            if (NomPrenomEmp != "" || Fonc != "" || Prod != "")
             {
-                rqtSql += "WHERE NOM_EMP LIKE '%" + NomPrenomEmp + "%' OR PRENOM_EMP LIKE '%" + NomPrenomEmp + "%' OR CONCAT(NOM_EMP,' ',PRENOM_EMP) LIKE '%" + NomPrenomEmp + "%';";
+                rqtSql += "WHERE ";
+                if (NomPrenomEmp != "")
+                {
+                    rqtSql += "(NOM_EMP LIKE '%" + NomPrenomEmp + "%' OR PRENOM_EMP LIKE '%" + NomPrenomEmp + "%' OR CONCAT(NOM_EMP,' ',PRENOM_EMP) LIKE '%" + NomPrenomEmp + "%') ";
+                }
+
+                if (NomPrenomEmp != "" && Fonc != "")
+                    rqtSql += "AND ";
+
+                if (Fonc != "")
+                {
+                    rqtSql += "LIB_FONC = '" + Fonc + "' ";
+                }
+
+                if ((Prod != "" && Fonc != "") || (NomPrenomEmp != "" && Prod != ""))
+                    rqtSql += "AND ";
+
+                if (Prod != "")
+                {
+                    rqtSql += "LIB_PROD = '" + Prod + "' ";
+                }
+
+                rqtSql += ";";
 
                 try
                 {
@@ -106,35 +128,7 @@ namespace BOISDUROY_BACKOFFICE.Controllers
             }
             else
             {
-                try
-                {
-                    using (MySqlCommand cmd = new MySqlCommand(rqtSql+";", conn.Connection))
-                    {
-                        conn.Connection.Open();
-                        MySqlDataReader reader = cmd.ExecuteReader();
-                        dtListeEmp.Load(reader);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                }
-                conn.Connection.Close();
-                return dtListeEmp;
-            }
-        }
-
-        public DataTable GetEmpByFonc(string Fonc)
-        {
-            dtListeEmp = new DataTable();
-            conn = new Connexion();
-            string rqtSql = "SELECT ID_EMP,NOM_EMP,PRENOM_EMP,F.LIB_FONC,P.LIB_PROD,DATE_NAISS,DATE_ENTREE,DATE_SORTIE,ID_EMP_ETRE_SUPERVISE,EST_AUTO,EST_RESP " +
-                "FROM EMPLOYES E LEFT JOIN PRODUITS P ON E.CODE_PROD = P.CODE_PROD RIGHT JOIN FONCTIONS F ON E.CODE_FONCT=F.CODE_FONCT";
-
-            if (Fonc != "")
-            {
-                rqtSql += "WHERE LIB_FONC = '"+ Fonc+"';";
-
+                rqtSql += ";";
                 try
                 {
                     using (MySqlCommand cmd = new MySqlCommand(rqtSql, conn.Connection))
@@ -151,79 +145,14 @@ namespace BOISDUROY_BACKOFFICE.Controllers
                 conn.Connection.Close();
                 return dtListeEmp;
             }
-            else
-            {
-                try
-                {
-                    using (MySqlCommand cmd = new MySqlCommand(rqtSql+";", conn.Connection))
-                    {
-                        conn.Connection.Open();
-                        MySqlDataReader reader = cmd.ExecuteReader();
-                        dtListeEmp.Load(reader);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                }
-                conn.Connection.Close();
-                return dtListeEmp;
-            }
         }
-
-        public DataTable GetEmpByProd(string Prod)
-        {
-            dtListeEmp = new DataTable();
-            conn = new Connexion();
-            string rqtSql = "SELECT ID_EMP,NOM_EMP,PRENOM_EMP,F.LIB_FONC,P.LIB_PROD,DATE_NAISS,DATE_ENTREE,DATE_SORTIE,ID_EMP_ETRE_SUPERVISE,EST_AUTO,EST_RESP " +
-                "FROM EMPLOYES E RIGHT JOIN PRODUITS P ON E.CODE_PROD = P.CODE_PROD LEFT JOIN FONCTIONS F ON E.CODE_FONCT=F.CODE_FONCT";
-
-            if (Prod != "")
-            {
-                rqtSql += "WHERE LIB_PROD = '" + Prod + "';";
-
-                try
-                {
-                    using (MySqlCommand cmd = new MySqlCommand(rqtSql, conn.Connection))
-                    {
-                        conn.Connection.Open();
-                        MySqlDataReader reader = cmd.ExecuteReader();
-                        dtListeEmp.Load(reader);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                }
-                conn.Connection.Close();
-                return dtListeEmp;
-            }
-            else
-            {
-                try
-                {
-                    using (MySqlCommand cmd = new MySqlCommand(rqtSql + ";", conn.Connection))
-                    {
-                        conn.Connection.Open();
-                        MySqlDataReader reader = cmd.ExecuteReader();
-                        dtListeEmp.Load(reader);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                }
-                conn.Connection.Close();
-                return dtListeEmp;
-            }
-        }
-
+        
         public void InsertEmp(string matricule, string nom, string prenom, string dateNaiss, string dateEntree, string codeFonc, string codeProd, string matResp, bool estResp, bool estAuto)
         {
             conn = new Connexion();
             string rqtSql = "INSERT INTO EMPLOYES (ID_EMP, CODE_FONCT, CODE_PROD, ID_EMP_ETRE_SUPERVISE, NOM_EMP, PRENOM_EMP, DATE_NAISS, DATE_ENTREE, DATE_SORTIE, PREM_CO, EST_AUTO, EST_RESP) " +
-                "VALUES (@id, @codeFonc, @codeProd, @idResp, @nom, @prenom, @dateNaiss, @dateEntree, NULL, 1, @estAuto, @estResp);" +
-                "UPDATE EMPLOYES SET MDP_EMP = PASSWORD(CONCAT(SUBSTRING(PRENOM_EMP,1,1),SUBSTRING(NOM_EMP,1,1),SUBSTRING(NOM_EMP,LENGTH(NOM_EMP),1),SUBSTRING(ID_EMP,3))) WHERE ID_EMP=@id;";
+                "VALUES (@id, @codeFonc, @codeProd, @idResp, @nom, @prenom, STR_TO_DATE(@dateNaiss,'%d-%m-%Y'), STR_TO_DATE(@dateEntree,'%d-%m-%Y'), NULL, 1, @estAuto, @estResp);" +
+                "UPDATE EMPLOYES SET MDP_EMP = MD5(CONCAT(SUBSTRING(PRENOM_EMP,1,1),SUBSTRING(NOM_EMP,1,1),SUBSTRING(NOM_EMP,LENGTH(NOM_EMP),1),SUBSTRING(ID_EMP,3))) WHERE ID_EMP=@id;";
             try
             {
                 conn.Connection.Open();
@@ -231,7 +160,7 @@ namespace BOISDUROY_BACKOFFICE.Controllers
                 cmd.Parameters.AddWithValue("@id", matricule);
                 cmd.Parameters.AddWithValue("@nom", nom);
                 cmd.Parameters.AddWithValue("@prenom", prenom);
-                cmd.Parameters.AddWithValue("@date", dateNaiss);
+                cmd.Parameters.AddWithValue("@dateNaiss", dateNaiss);
                 cmd.Parameters.AddWithValue("@dateEntree", dateEntree);
                 cmd.Parameters.AddWithValue("@codeFonc", codeFonc);
                 cmd.Parameters.AddWithValue("@codeProd", codeProd);
@@ -252,10 +181,11 @@ namespace BOISDUROY_BACKOFFICE.Controllers
         {
             conn = new Connexion();
             string rqtSql = "UPDATE EMPLOYES SET CODE_FONCTION=@codeFonc, CODE_PROD=@codeProd, NOM_EMP=@nom, PRENOM_EMP=@prenom, " +
-                "DATE_NAISS=@dateNaiss, DATE_ENTREE=@dateEntree, DATE_SORTIE=@dateSortie, EST_AUTO=@estAuto, EST_RESP=@estResp WHERE ID_EMP=@id;";
+                "DATE_NAISS=STR_TO_DATE(@dateNaiss,'%d-%m-%Y'), DATE_ENTREE=STR_TO_DATE(@dateEntree,'%d-%m-%Y'), DATE_SORTIE=STR_TO_DATE(@dateSortie,'%d-%m-%Y'), " +
+                "EST_AUTO=@estAuto, EST_RESP=@estResp WHERE ID_EMP=@id;";
             if (resetMDP)
             {
-                rqtSql += "UPDATE EMPLOYES SET PREM_CO=1, MDP_EMP=MDP_EMP = PASSWORD(CONCAT(SUBSTRING(PRENOM_EMP,1,1),SUBSTRING(NOM_EMP,1,1),SUBSTRING(NOM_EMP,LENGTH(NOM_EMP),1),SUBSTRING(ID_EMP,3))) " +
+                rqtSql += "UPDATE EMPLOYES SET PREM_CO=1, MDP_EMP = MD5(CONCAT(SUBSTRING(PRENOM_EMP,1,1),SUBSTRING(NOM_EMP,1,1),SUBSTRING(NOM_EMP,LENGTH(NOM_EMP),1),SUBSTRING(ID_EMP,3))) " +
                     "WHERE ID_EMP=@id;";
             }
 

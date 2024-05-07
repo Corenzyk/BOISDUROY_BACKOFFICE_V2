@@ -35,6 +35,7 @@ namespace BOISDUROY_BACKOFFICE
         private void InitializeComponent()
         {
             this.GB_AjoutModif = new System.Windows.Forms.GroupBox();
+            this.check_sortie = new System.Windows.Forms.CheckBox();
             this.cb_Fonc = new System.Windows.Forms.ComboBox();
             this.lbl_Fonc = new System.Windows.Forms.Label();
             this.cb_Prod = new System.Windows.Forms.ComboBox();
@@ -58,7 +59,6 @@ namespace BOISDUROY_BACKOFFICE
             this.btn_Valider = new System.Windows.Forms.Button();
             this.txt_NomEmp = new System.Windows.Forms.TextBox();
             this.lbl_matricule = new System.Windows.Forms.Label();
-            this.check_sortie = new System.Windows.Forms.CheckBox();
             this.GB_AjoutModif.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,6 +93,20 @@ namespace BOISDUROY_BACKOFFICE
             this.GB_AjoutModif.Size = new System.Drawing.Size(428, 411);
             this.GB_AjoutModif.TabIndex = 0;
             this.GB_AjoutModif.TabStop = false;
+            // 
+            // check_sortie
+            // 
+            this.check_sortie.AutoSize = true;
+            this.check_sortie.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.check_sortie.Location = new System.Drawing.Point(41, 238);
+            this.check_sortie.Name = "check_sortie";
+            this.check_sortie.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.check_sortie.Size = new System.Drawing.Size(133, 24);
+            this.check_sortie.TabIndex = 28;
+            this.check_sortie.Text = "? Date de sortie";
+            this.check_sortie.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.check_sortie.UseVisualStyleBackColor = true;
+            this.check_sortie.CheckedChanged += new System.EventHandler(this.check_sortie_CheckedChanged);
             // 
             // cb_Fonc
             // 
@@ -306,20 +320,6 @@ namespace BOISDUROY_BACKOFFICE
             this.lbl_matricule.Size = new System.Drawing.Size(82, 20);
             this.lbl_matricule.TabIndex = 0;
             this.lbl_matricule.Text = "Matricule : ";
-            // 
-            // check_sortie
-            // 
-            this.check_sortie.AutoSize = true;
-            this.check_sortie.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.check_sortie.Location = new System.Drawing.Point(41, 238);
-            this.check_sortie.Name = "check_sortie";
-            this.check_sortie.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.check_sortie.Size = new System.Drawing.Size(133, 24);
-            this.check_sortie.TabIndex = 28;
-            this.check_sortie.Text = "? Date de sortie";
-            this.check_sortie.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.check_sortie.UseVisualStyleBackColor = true;
-            this.check_sortie.CheckedChanged += new System.EventHandler(this.check_sortie_CheckedChanged);
             // 
             // EmployesAM
             // 

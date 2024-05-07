@@ -36,13 +36,14 @@ namespace BOISDUROY_BACKOFFICE
         {
             this.dgv_Produit = new System.Windows.Forms.DataGridView();
             this.gb_recherche = new System.Windows.Forms.GroupBox();
-            this.txt_RechercheP = new System.Windows.Forms.TextBox();
+            this.lbl_dispo = new System.Windows.Forms.Label();
+            this.txt_search = new System.Windows.Forms.TextBox();
+            this.cb_dispoO = new System.Windows.Forms.CheckBox();
             this.lbl_Recherche = new System.Windows.Forms.Label();
             this.lbl_Titre = new System.Windows.Forms.Label();
             this.btn_ajouter = new System.Windows.Forms.Button();
             this.btn_modifier = new System.Windows.Forms.Button();
             this.btn_supprimer = new System.Windows.Forms.Button();
-            this.cb_dispo = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Produit)).BeginInit();
             this.gb_recherche.SuspendLayout();
             this.SuspendLayout();
@@ -61,8 +62,9 @@ namespace BOISDUROY_BACKOFFICE
             // 
             // gb_recherche
             // 
-            this.gb_recherche.Controls.Add(this.txt_RechercheP);
-            this.gb_recherche.Controls.Add(this.cb_dispo);
+            this.gb_recherche.Controls.Add(this.lbl_dispo);
+            this.gb_recherche.Controls.Add(this.txt_search);
+            this.gb_recherche.Controls.Add(this.cb_dispoO);
             this.gb_recherche.Controls.Add(this.lbl_Recherche);
             this.gb_recherche.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.gb_recherche.Location = new System.Drawing.Point(246, 9);
@@ -72,12 +74,33 @@ namespace BOISDUROY_BACKOFFICE
             this.gb_recherche.TabStop = false;
             this.gb_recherche.Text = "Rechercher";
             // 
-            // txt_RechercheP
+            // lbl_dispo
             // 
-            this.txt_RechercheP.Location = new System.Drawing.Point(162, 26);
-            this.txt_RechercheP.Name = "txt_RechercheP";
-            this.txt_RechercheP.Size = new System.Drawing.Size(264, 27);
-            this.txt_RechercheP.TabIndex = 5;
+            this.lbl_dispo.AutoSize = true;
+            this.lbl_dispo.Location = new System.Drawing.Point(37, 66);
+            this.lbl_dispo.Name = "lbl_dispo";
+            this.lbl_dispo.Size = new System.Drawing.Size(92, 20);
+            this.lbl_dispo.TabIndex = 6;
+            this.lbl_dispo.Text = "Disponible ?";
+            // 
+            // txt_search
+            // 
+            this.txt_search.Location = new System.Drawing.Point(162, 26);
+            this.txt_search.Name = "txt_search";
+            this.txt_search.Size = new System.Drawing.Size(264, 27);
+            this.txt_search.TabIndex = 5;
+            this.txt_search.TextChanged += new System.EventHandler(this.txt_RechercheP_TextChanged);
+            // 
+            // cb_dispoO
+            // 
+            this.cb_dispoO.AutoSize = true;
+            this.cb_dispoO.Location = new System.Drawing.Point(162, 66);
+            this.cb_dispoO.Name = "cb_dispoO";
+            this.cb_dispoO.Size = new System.Drawing.Size(51, 24);
+            this.cb_dispoO.TabIndex = 4;
+            this.cb_dispoO.Text = "Oui";
+            this.cb_dispoO.UseVisualStyleBackColor = true;
+            this.cb_dispoO.CheckedChanged += new System.EventHandler(this.cb_dispoO_CheckedChanged);
             // 
             // lbl_Recherche
             // 
@@ -128,16 +151,6 @@ namespace BOISDUROY_BACKOFFICE
             this.btn_supprimer.Text = "Suppr";
             this.btn_supprimer.UseVisualStyleBackColor = true;
             // 
-            // cb_dispo
-            // 
-            this.cb_dispo.AutoSize = true;
-            this.cb_dispo.Location = new System.Drawing.Point(20, 70);
-            this.cb_dispo.Name = "cb_dispo";
-            this.cb_dispo.Size = new System.Drawing.Size(193, 24);
-            this.cb_dispo.TabIndex = 4;
-            this.cb_dispo.Text = "Le produit est disponible";
-            this.cb_dispo.UseVisualStyleBackColor = true;
-            // 
             // ListeProduits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -169,7 +182,8 @@ namespace BOISDUROY_BACKOFFICE
         private Button btn_modifier;
         private Button btn_supprimer;
         private DataGridView dgv_Produit;
-        private TextBox txt_RechercheP;
-        private CheckBox cb_dispo;
+        private TextBox txt_search;
+        private CheckBox cb_dispoO;
+        private Label lbl_dispo;
     }
 }

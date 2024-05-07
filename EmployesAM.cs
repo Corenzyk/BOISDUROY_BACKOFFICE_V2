@@ -107,17 +107,21 @@ namespace BOISDUROY_BACKOFFICE
                 {
                     messageErreur += "\r\n - La date d'entrée";
                 }
-                if (cb_Fonc.SelectedValue.ToString() == "")
+                if (cb_Fonc.SelectedValue.ToString() == "") //Condition non prise en compte
                 {
                     messageErreur += "\r\n - La fonction";
                 }
-                if (cb_Prod.SelectedValue.ToString() == "")
+                if (cb_Prod.SelectedValue.ToString() == "") //Condition non prise en compte
                 {
                     messageErreur += "\r\n - Le produit";
                 }
                 if (cb_Resp.SelectedValue.ToString() != "" && check_resp.Checked)
                 {
                     messageErreur += "\r\nVous ne pouvez pas créer un employé responsable avec un responsable";
+                }
+                if (cb_Resp.SelectedValue.ToString() == "" && !check_resp.Checked)
+                {
+                    messageErreur += "\r\nVous ne pouvez pas créer un employé responsable sans responsable";
                 }
                 if (cb_Resp.SelectedValue.ToString() != "REL" && check_resp.Checked)
                 {
@@ -129,10 +133,12 @@ namespace BOISDUROY_BACKOFFICE
             {
                 if (modif == false)
                 {
+                    //Insertion non réalisée
                     emp.InsertEmp(txt_Matricule.Text, txt_NomEmp.Text, txt_PrenomEmp.Text, Convert.ToString(dateP_DateNaiss.Value), Convert.ToString(dateP_DateEntree.Value), Convert.ToString(cb_Fonc.SelectedValue), Convert.ToString(cb_Prod.SelectedValue), Convert.ToString(cb_Resp.SelectedValue), check_resp.Checked, check_backoffice.Checked); //Paramètres pour l'insertion
                 }
                 else
                 {
+                    //Update non réalisée
                     emp.UpdateEmp(txt_Matricule.Text, txt_NomEmp.Text, txt_PrenomEmp.Text, Convert.ToString(dateP_DateNaiss.Value), Convert.ToString(dateP_DateEntree.Value), Convert.ToString(dateP_DateSortie.Value), Convert.ToString(cb_Fonc.SelectedValue), Convert.ToString(cb_Prod.SelectedValue), Convert.ToString(cb_Resp.SelectedValue), check_resp.Checked, check_backoffice.Checked, check_mdp.Checked);
                 }
                 ListeEmployes LE = new ListeEmployes();
@@ -150,7 +156,6 @@ namespace BOISDUROY_BACKOFFICE
             }
             else
             {
-
                 dateP_DateSortie.Visible = false;
             }
         }

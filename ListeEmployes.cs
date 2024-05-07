@@ -112,7 +112,7 @@ namespace BOISDUROY_BACKOFFICE
 
         private void txt_search_TextChanged(object sender, EventArgs e)
         {
-            /*dgv_Employe.DataSource = emp.GetEmpByNom(txt_search.Text);
+            dgv_Employe.DataSource = emp.GetEmpByFiltre(txt_search.Text, Convert.ToString(cb_fonc.SelectedValue), Convert.ToString(cb_prod.SelectedValue)); //Entrée d'une lettre -> plante
             dgv_Employe.Columns[0].HeaderText = "Matricule";
             dgv_Employe.Columns[0].Width = 60;
             dgv_Employe.Columns[1].HeaderText = "Nom";
@@ -133,40 +133,23 @@ namespace BOISDUROY_BACKOFFICE
             dgv_Employe.Columns[8].Width = 75;
             dgv_Employe.Columns[9].HeaderText = "Autoriser BO ?";
             dgv_Employe.Columns[9].Width = 100;
-            dgv_Employe.Columns[10].HeaderText = "Est responsable ?";
-            dgv_Employe.Columns[10].Width = 100*/
+            dgv_Employe.Columns[10].HeaderText = "Responsable ?";
+            dgv_Employe.Columns[10].Width = 100;
         }
 
         private void cb_fonc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*dgv_Employe.DataSource = emp.GetEmpByFonc(Convert.ToString(cb_fonc.SelectedValue));
-            dgv_Employe.Columns[0].HeaderText = "Matricule";
-            dgv_Employe.Columns[0].Width = 60;
-            dgv_Employe.Columns[1].HeaderText = "Nom";
-            dgv_Employe.Columns[1].Width = 80;
-            dgv_Employe.Columns[2].HeaderText = "Prenom";
-            dgv_Employe.Columns[2].Width = 80;
-            dgv_Employe.Columns[3].HeaderText = "Fonction";
-            dgv_Employe.Columns[3].Width = 130;
-            dgv_Employe.Columns[4].HeaderText = "Type Produit";
-            dgv_Employe.Columns[4].Width = 130;
-            dgv_Employe.Columns[5].HeaderText = "Date naissance";
-            dgv_Employe.Columns[5].Width = 80;
-            dgv_Employe.Columns[6].HeaderText = "Date entrée";
-            dgv_Employe.Columns[6].Width = 80;
-            dgv_Employe.Columns[7].HeaderText = "Date sortie";
-            dgv_Employe.Columns[7].Width = 80;
-            dgv_Employe.Columns[8].HeaderText = "Responsable";
-            dgv_Employe.Columns[8].Width = 75;
-            dgv_Employe.Columns[9].HeaderText = "Autoriser BO ?";
-            dgv_Employe.Columns[9].Width = 100;
-            dgv_Employe.Columns[10].HeaderText = "Est responsable ?";
-            dgv_Employe.Columns[10].Width = 100;*/
+            
         }
 
         private void cb_prod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*dgv_Employe.DataSource = emp.GetEmpByProd(Convert.ToString(cb_prod.SelectedValue));
+            
+        }
+
+        private void cb_fonc_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            dgv_Employe.DataSource = emp.GetEmpByFiltre(txt_search.Text, Convert.ToString(cb_fonc.SelectedValue), Convert.ToString(cb_prod.SelectedValue)); //Entrée d'une lettre -> plante
             dgv_Employe.Columns[0].HeaderText = "Matricule";
             dgv_Employe.Columns[0].Width = 60;
             dgv_Employe.Columns[1].HeaderText = "Nom";
@@ -187,8 +170,35 @@ namespace BOISDUROY_BACKOFFICE
             dgv_Employe.Columns[8].Width = 75;
             dgv_Employe.Columns[9].HeaderText = "Autoriser BO ?";
             dgv_Employe.Columns[9].Width = 100;
-            dgv_Employe.Columns[10].HeaderText = "Est responsable ?";
-            dgv_Employe.Columns[10].Width = 100;*/
+            dgv_Employe.Columns[10].HeaderText = "Responsable ?";
+            dgv_Employe.Columns[10].Width = 100;
+        }
+
+        private void cb_prod_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            dgv_Employe.DataSource = emp.GetEmpByFiltre(txt_search.Text, Convert.ToString(cb_fonc.SelectedValue), Convert.ToString(cb_prod.SelectedValue)); //Entrée d'une lettre -> plante
+            dgv_Employe.Columns[0].HeaderText = "Matricule";
+            dgv_Employe.Columns[0].Width = 60;
+            dgv_Employe.Columns[1].HeaderText = "Nom";
+            dgv_Employe.Columns[1].Width = 80;
+            dgv_Employe.Columns[2].HeaderText = "Prenom";
+            dgv_Employe.Columns[2].Width = 80;
+            dgv_Employe.Columns[3].HeaderText = "Fonction";
+            dgv_Employe.Columns[3].Width = 130;
+            dgv_Employe.Columns[4].HeaderText = "Type Produit";
+            dgv_Employe.Columns[4].Width = 130;
+            dgv_Employe.Columns[5].HeaderText = "Date naissance";
+            dgv_Employe.Columns[5].Width = 80;
+            dgv_Employe.Columns[6].HeaderText = "Date entrée";
+            dgv_Employe.Columns[6].Width = 80;
+            dgv_Employe.Columns[7].HeaderText = "Date sortie";
+            dgv_Employe.Columns[7].Width = 80;
+            dgv_Employe.Columns[8].HeaderText = "Responsable";
+            dgv_Employe.Columns[8].Width = 75;
+            dgv_Employe.Columns[9].HeaderText = "Autoriser BO ?";
+            dgv_Employe.Columns[9].Width = 100;
+            dgv_Employe.Columns[10].HeaderText = "Responsable ?";
+            dgv_Employe.Columns[10].Width = 100;
         }
     }
 }

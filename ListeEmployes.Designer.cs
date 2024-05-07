@@ -88,6 +88,7 @@ namespace BOISDUROY_BACKOFFICE
             this.cb_prod.Size = new System.Drawing.Size(352, 28);
             this.cb_prod.TabIndex = 11;
             this.cb_prod.SelectedIndexChanged += new System.EventHandler(this.cb_prod_SelectedIndexChanged);
+            this.cb_prod.SelectionChangeCommitted += new System.EventHandler(this.cb_prod_SelectionChangeCommitted);
             // 
             // cb_fonc
             // 
@@ -96,7 +97,7 @@ namespace BOISDUROY_BACKOFFICE
             this.cb_fonc.Name = "cb_fonc";
             this.cb_fonc.Size = new System.Drawing.Size(352, 28);
             this.cb_fonc.TabIndex = 10;
-            this.cb_fonc.SelectedIndexChanged += new System.EventHandler(this.cb_fonc_SelectedIndexChanged);
+            this.cb_fonc.SelectionChangeCommitted += new System.EventHandler(this.cb_fonc_SelectionChangeCommitted);
             // 
             // label3
             // 
