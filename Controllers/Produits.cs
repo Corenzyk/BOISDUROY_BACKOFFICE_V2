@@ -153,8 +153,7 @@ namespace BOISDUROY_BACKOFFICE.Controllers
                 cmd.Parameters.AddWithValue("@nom", nom);
                 cmd.Parameters.AddWithValue("@estDispo", dispo); 
                 conn.Connection.Open();
-                cmd.ExecuteNonQuery();
-
+                MySqlDataReader reader = cmd.ExecuteReader();
             }
             catch (Exception e)
             {
@@ -174,7 +173,7 @@ namespace BOISDUROY_BACKOFFICE.Controllers
                 cmd.Parameters.AddWithValue("@nom", nom);
                 cmd.Parameters.AddWithValue("@estDispo", dispo);
                 conn.Connection.Open();
-                cmd.ExecuteNonQuery();
+                MySqlDataReader reader = cmd.ExecuteReader();
             }
             catch (Exception e)
             {
@@ -194,7 +193,7 @@ namespace BOISDUROY_BACKOFFICE.Controllers
 
                 cmd.Parameters.AddWithValue("@id", idProd);
                 conn.Connection.Open();
-                cmd.ExecuteNonQuery();
+                MySqlDataReader reader = cmd.ExecuteReader();
                 result = true;
 
             }

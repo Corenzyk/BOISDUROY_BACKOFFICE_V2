@@ -60,12 +60,10 @@ namespace BOISDUROY_BACKOFFICE
             {
                 if (modif == false)
                 {
-                    //Insertion non réalisée
                     prod.InsertProd(txt_code.Text, txt_lib.Text, check_dispo.Checked); //Paramètres pour l'insertion
                 }
                 else
                 {
-                    //Update non réalisée
                     prod.UpdateProd(txt_code.Text, txt_lib.Text, check_dispo.Checked);
                 }
                 ListeEmployes LE = new ListeEmployes();

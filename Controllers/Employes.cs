@@ -155,7 +155,6 @@ namespace BOISDUROY_BACKOFFICE.Controllers
                 "UPDATE EMPLOYES SET MDP_EMP = MD5(CONCAT(SUBSTRING(PRENOM_EMP,1,1),SUBSTRING(NOM_EMP,1,1),SUBSTRING(NOM_EMP,LENGTH(NOM_EMP),1),SUBSTRING(ID_EMP,3))) WHERE ID_EMP=@id;";
             try
             {
-                conn.Connection.Open();
                 MySqlCommand cmd = new MySqlCommand(rqtSql, conn.Connection);
                 cmd.Parameters.AddWithValue("@id", matricule);
                 cmd.Parameters.AddWithValue("@nom", nom);
@@ -167,7 +166,9 @@ namespace BOISDUROY_BACKOFFICE.Controllers
                 cmd.Parameters.AddWithValue("@idResp", matResp);
                 cmd.Parameters.AddWithValue("@estResp", estResp);
                 cmd.Parameters.AddWithValue("@estAuto", estAuto);
-                cmd.ExecuteNonQuery();
+                conn.Connection.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
 
             }
             catch (Exception e)
@@ -191,7 +192,6 @@ namespace BOISDUROY_BACKOFFICE.Controllers
 
             try
             {
-                conn.Connection.Open();
                 MySqlCommand cmd = new MySqlCommand(rqtSql, conn.Connection);
                 cmd.Parameters.AddWithValue("@id", matricule);
                 cmd.Parameters.AddWithValue("@nom", nom);
@@ -204,7 +204,8 @@ namespace BOISDUROY_BACKOFFICE.Controllers
                 cmd.Parameters.AddWithValue("@idResp", matResp);
                 cmd.Parameters.AddWithValue("@estResp", estResp);
                 cmd.Parameters.AddWithValue("@estAuto", estAuto);
-                cmd.ExecuteNonQuery();
+                conn.Connection.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
             }
             catch (Exception e)
             {
@@ -220,10 +221,10 @@ namespace BOISDUROY_BACKOFFICE.Controllers
             string rqtSql = "UPDATE EMPLOYES SET DATE_SORTIE=DATE(NOW()), EST_AUTO=0; WHERE ID_EMP=@id";
             try
             {
-                conn.Connection.Open();
                 MySqlCommand cmd = new MySqlCommand(rqtSql, conn.Connection);
                 cmd.Parameters.AddWithValue("@id", idEmp);
-                cmd.ExecuteNonQuery();
+                conn.Connection.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
                 result = true;
 
             }
